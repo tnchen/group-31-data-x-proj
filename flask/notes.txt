@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/37379374/insert-the-folium-maps-into-the-jinja-template
+https://stackoverflow.com/questions/3206344/passing-html-to-template-using-flask-jinja2

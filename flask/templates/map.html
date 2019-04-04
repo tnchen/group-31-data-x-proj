@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="slider-container">
+	<form action="/map" method="post" id="form">
+  		<input type="range" min="0" max="5000" step="100" value={{numIncidents}} class="slider" id="numIncidents" name="numIncidents">
+	</form>
+</div>
+<div class="pad">
+	<span># of Incidents:</span> <span id="sliderVal"></span>
+</div>
+<div class="pad">
+	<button type="submit" form="form" value="Apply">Apply</button>
+	<span>pos:</span> <span id="pos"></span>
+</div>
+
+{% endblock %}
+
+{% block map %}
+
+{{map}}
+
+<script type="text/javascript">
+	// Get the elements
+	var slider = document.getElementById("numIncidents");
+	var sliderVal = document.getElementById("sliderVal");
+	var map = document.querySelector('[id^=map_]');
+	var mapPos = document.getElementById("pos");
+
+	// Set the values
+	sliderVal.innerHTML = slider.value;
+	mapPos.innerHTML = map.id;
+
+	// Update slider value when it's dragged
+	slider.oninput = function() {
+	 	sliderVal.innerHTML = this.value;
+
+	 	// Get the map's position
+	 	mapHTML = map.innerHTML;
+	 	posStart = mapHTML.indexOf('translate3d');
+	 	posEnd = mapHTML.indexOf(')', posStart) + 1;
+	 	mapPos.innerHTML = mapHTML.substring(posStart, posEnd);
+	}
+	
+
+</script>
+
+{% endblock %}
