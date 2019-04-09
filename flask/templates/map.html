@@ -1,17 +1,18 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 {% block content %}
 
-<div class="slider-container">
-	<form action="/map" method="post" id="form">
-  		<input type="range" min="0" max="5000" step="100" value={{numIncidents}} class="slider" id="numIncidents" name="numIncidents">
-	</form>
+<div class='slider-container'>
+    <form action='/map' method='post' id='form' onsubmit='return getMapInfo()'> 
+        <input type='range' min='0' max='5000' step='100' value={{numIncidents}} class='slider' id='numIncidents' name='numIncidents'>
+        <input type='hidden' value='' id='center' name='center'>
+        <input type='hidden' value='' id='zoom' name='zoom'>
+    </form>
 </div>
-<div class="pad">
-	<span># of Incidents:</span> <span id="sliderVal"></span>
+<div class='pad'>
+    <span># of Incidents:</span> <span id='sliderVal'></span>
 </div>
-<div class="pad">
-	<button type="submit" form="form" value="Apply">Apply</button>
-	<span>pos:</span> <span id="pos"></span>
+<div class='pad'>
+    <button type='submit' form='form' value='Apply'>Apply</button>
 </div>
 
 {% endblock %}
@@ -20,29 +21,49 @@
 
 {{map}}
 
-<script type="text/javascript">
-	// Get the elements
-	var slider = document.getElementById("numIncidents");
-	var sliderVal = document.getElementById("sliderVal");
-	var map = document.querySelector('[id^=map_]');
-	var mapPos = document.getElementById("pos");
+<script type='text/javascript'>
+    // --- SLIDER ---
+    // Get the slider elements
+    var slider = document.getElementById('numIncidents');
+    var sliderVal = document.getElementById('sliderVal');
 
-	// Set the values
-	sliderVal.innerHTML = slider.value;
-	mapPos.innerHTML = map.id;
+    // Set the values
+    sliderVal.innerHTML = slider.value;
 
-	// Update slider value when it's dragged
-	slider.oninput = function() {
-	 	sliderVal.innerHTML = this.value;
+    // Update slider value when it's dragged
+    slider.oninput = function() {
+        sliderVal.innerHTML = this.value;
+    }
 
-	 	// Get the map's position
-	 	mapHTML = map.innerHTML;
-	 	posStart = mapHTML.indexOf('translate3d');
-	 	posEnd = mapHTML.indexOf(')', posStart) + 1;
-	 	mapPos.innerHTML = mapHTML.substring(posStart, posEnd);
-	}
-	
+    // --- MAP ---
+    // Get the map JS object
+    var mapObj = {{mapVar}}
+    console.dir(mapObj)
+    
+    // // Get the map elements
+    // var mapPane = document.getElementsByClassName('leaflet-pane leaflet-map-pane')[0];
+    // var mapPane2 = document.getElementsByClassName('leaflet-proxy leaflet-zoom-animated')[0];
 
+    // // Replace the map transforms
+    // mapPane.setAttribute('style', 'transform: {{mapTrans}}');
+    // mapPane2.setAttribute('style', 'transform: {{mapTrans2}}');
+    // console.log('{{mapTrans}}');
+    // console.log('{{mapTrans2}}');
+    // console.log(mapPane.style);
+    // console.log(mapPane2.style);
+
+    function getMapInfo() {
+        // Get the map elements
+        // var map = document.querySelector('[id^=map_]');
+        var mapPane = document.getElementsByClassName('leaflet-pane leaflet-map-pane')[0];
+        var mapPane2 = document.getElementsByClassName('leaflet-proxy leaflet-zoom-animated')[0];
+        var mapCenter = document.getElementById('center');
+        var mapZoom = document.getElementById('zoom');
+        
+        // Extract the transforms
+        mapCenter.value = mapObj.getCenter();
+        mapZoom.value = mapObj.getZoom();
+    } 
 </script>
 
 {% endblock %}
