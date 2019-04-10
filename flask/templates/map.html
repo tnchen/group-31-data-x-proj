@@ -1,17 +1,33 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 {% block content %}
 
-<div class="slider-container">
-	<form action="/map" method="post" id="form">
-  		<input type="range" min="0" max="5000" step="100" value={{numIncidents}} class="slider" id="numIncidents" name="numIncidents">
-	</form>
+
+<form action='/map' method='post' id='form' onsubmit='return getMapInfo()'> 
+    <div class='pad'>
+        Factor to Plot: 
+        <select id='factor'>
+            {%for i in range(0, numFactors) %}
+                {% if i == selectedIndex %}
+                    <option value='{{factors[i]}}' selected>{{factors[i]}}</option> 
+                {% else %}
+                    <option value='{{factors[i]}}'>{{factors[i]}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <div class='slider-container'>
+        <input type='range' min='0' max='5000' step='100' value={{numIncidents}} class='slider' id='numIncidents' name='numIncidents'>
+    </div>
+    <input type='hidden' value='' id='center' name='center'>
+    <input type='hidden' value='' id='zoom' name='zoom'>
+    <input type='hidden' value='{{selectedIndex}}' id='indexVal' name='indexVal'>
+</form>
+
+<div class='pad'>
+    # of Incidents: <span id='sliderVal'></span>
 </div>
-<div class="pad">
-	<span># of Incidents:</span> <span id="sliderVal"></span>
-</div>
-<div class="pad">
-	<button type="submit" form="form" value="Apply">Apply</button>
-	<span>pos:</span> <span id="pos"></span>
+<div class='pad'>
+    <button type='submit' form='form' value='Go!'>Go!</button>
 </div>
 
 {% endblock %}
@@ -20,29 +36,47 @@
 
 {{map}}
 
-<script type="text/javascript">
-	// Get the elements
-	var slider = document.getElementById("numIncidents");
-	var sliderVal = document.getElementById("sliderVal");
-	var map = document.querySelector('[id^=map_]');
-	var mapPos = document.getElementById("pos");
+<script type='text/javascript'>
+    // --- DROPDOWN ---
+    // Get the dropdown element
+    var dropdown = document.getElementById('factor');
+    var dropdownVal = document.getElementById('indexVal');
 
-	// Set the values
-	sliderVal.innerHTML = slider.value;
-	mapPos.innerHTML = map.id;
+    // Update the hidden form selection when the dropdown changes
+    dropdown.onchange = function() {
+        dropdownVal.value = dropdown.selectedIndex
+        console.log(dropdownVal.value)
+    }
 
-	// Update slider value when it's dragged
-	slider.oninput = function() {
-	 	sliderVal.innerHTML = this.value;
+    // --- SLIDER ---
+    // Get the slider elements
+    var slider = document.getElementById('numIncidents');
+    var sliderVal = document.getElementById('sliderVal');
 
-	 	// Get the map's position
-	 	mapHTML = map.innerHTML;
-	 	posStart = mapHTML.indexOf('translate3d');
-	 	posEnd = mapHTML.indexOf(')', posStart) + 1;
-	 	mapPos.innerHTML = mapHTML.substring(posStart, posEnd);
-	}
-	
+    // Set the values
+    sliderVal.innerHTML = slider.value;
 
+    // Update slider value when it's dragged
+    slider.oninput = function() {
+        sliderVal.innerHTML = this.value;
+    }
+
+    // --- MAP ---
+    // Get the map JS object
+    var mapObj = {{mapVar}}  
+
+    // Get the map elements
+    var mapCenter = document.getElementById('center');
+    var mapZoom = document.getElementById('zoom');
+        
+    // Extract the transforms
+    getMapInfo()
+
+    function getMapInfo() {     
+        // Extract the transforms
+        mapCenter.value = mapObj.getCenter();
+        mapZoom.value = mapObj.getZoom();
+    } 
 </script>
 
 {% endblock %}
