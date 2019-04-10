@@ -6,6 +6,7 @@ import pandas as pd
 directory = os.path.dirname(os.path.dirname(__file__))
 path = os.path.join(directory, 'data', 'final_data.csv')
 gunViolence = pd.read_csv(path)
+gunViolence.fillna(0, inplace=True)
 
 # Subset state data
 stateCols = ['state', 'Mental_Health_Records_Submitted_2008', 'Mental_Health_Records_Submitted_2017', 'Gun_Sale_Denials_2008',
