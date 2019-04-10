@@ -1,18 +1,33 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<div class='slider-container'>
-    <form action='/map' method='post' id='form' onsubmit='return getMapInfo()'> 
+
+<form action='/map' method='post' id='form' onsubmit='return getMapInfo()'> 
+    <div class='pad'>
+        Factor to Plot: 
+        <select id='factor'>
+            {%for i in range(0, numFactors) %}
+                {% if i == selectedIndex %}
+                    <option value='{{factors[i]}}' selected>{{factors[i]}}</option> 
+                {% else %}
+                    <option value='{{factors[i]}}'>{{factors[i]}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <div class='slider-container'>
         <input type='range' min='0' max='5000' step='100' value={{numIncidents}} class='slider' id='numIncidents' name='numIncidents'>
-        <input type='hidden' value='' id='center' name='center'>
-        <input type='hidden' value='' id='zoom' name='zoom'>
-    </form>
+    </div>
+    <input type='hidden' value='' id='center' name='center'>
+    <input type='hidden' value='' id='zoom' name='zoom'>
+    <input type='hidden' value='{{selectedIndex}}' id='indexVal' name='indexVal'>
+</form>
+
+<div class='pad'>
+    # of Incidents: <span id='sliderVal'></span>
 </div>
 <div class='pad'>
-    <span># of Incidents:</span> <span id='sliderVal'></span>
-</div>
-<div class='pad'>
-    <button type='submit' form='form' value='Apply'>Apply</button>
+    <button type='submit' form='form' value='Go!'>Go!</button>
 </div>
 
 {% endblock %}
@@ -22,6 +37,17 @@
 {{map}}
 
 <script type='text/javascript'>
+    // --- DROPDOWN ---
+    // Get the dropdown element
+    var dropdown = document.getElementById('factor');
+    var dropdownVal = document.getElementById('indexVal');
+
+    // Update the hidden form selection when the dropdown changes
+    dropdown.onchange = function() {
+        dropdownVal.value = dropdown.selectedIndex
+        console.log(dropdownVal.value)
+    }
+
     // --- SLIDER ---
     // Get the slider elements
     var slider = document.getElementById('numIncidents');
@@ -37,29 +63,16 @@
 
     // --- MAP ---
     // Get the map JS object
-    var mapObj = {{mapVar}}
-    console.dir(mapObj)
-    
-    // // Get the map elements
-    // var mapPane = document.getElementsByClassName('leaflet-pane leaflet-map-pane')[0];
-    // var mapPane2 = document.getElementsByClassName('leaflet-proxy leaflet-zoom-animated')[0];
+    var mapObj = {{mapVar}}  
 
-    // // Replace the map transforms
-    // mapPane.setAttribute('style', 'transform: {{mapTrans}}');
-    // mapPane2.setAttribute('style', 'transform: {{mapTrans2}}');
-    // console.log('{{mapTrans}}');
-    // console.log('{{mapTrans2}}');
-    // console.log(mapPane.style);
-    // console.log(mapPane2.style);
-
-    function getMapInfo() {
-        // Get the map elements
-        // var map = document.querySelector('[id^=map_]');
-        var mapPane = document.getElementsByClassName('leaflet-pane leaflet-map-pane')[0];
-        var mapPane2 = document.getElementsByClassName('leaflet-proxy leaflet-zoom-animated')[0];
-        var mapCenter = document.getElementById('center');
-        var mapZoom = document.getElementById('zoom');
+    // Get the map elements
+    var mapCenter = document.getElementById('center');
+    var mapZoom = document.getElementById('zoom');
         
+    // Extract the transforms
+    getMapInfo()
+
+    function getMapInfo() {     
         // Extract the transforms
         mapCenter.value = mapObj.getCenter();
         mapZoom.value = mapObj.getZoom();
