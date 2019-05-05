@@ -45,7 +45,6 @@
     // Update the hidden form selection when the dropdown changes
     dropdown.onchange = function() {
         dropdownVal.value = dropdown.selectedIndex
-        console.log(dropdownVal.value)
     }
 
     // --- SLIDER ---
@@ -63,7 +62,7 @@
 
     // --- MAP ---
     // Get the map JS object
-    var mapObj = {{mapVar}}  
+    var mapObj = {{mapVar}}
 
     // Get the map elements
     var mapCenter = document.getElementById('center');

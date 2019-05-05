@@ -1,0 +1,227 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+<form action='/ml' method='post' id='form'> 
+    <div class='pad'>
+        Year: 
+        <select id='dropdownYear'>
+            {%for i in range(2005, 2026) %}
+                {% if i == selectedYear %}
+                    <option value='{{i}}' selected>{{i}}</option> 
+                {% else %}
+                    <option value='{{i}}'>{{i}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <div class='pad'>
+        Month: 
+        <select id='dropdownMonth'>
+            {%for i in range(0, 12) %}
+                {% if i == selectedMonth %}
+                    <option value='{{i}}' selected>{{monthList[i]}}</option> 
+                {% else %}
+                    <option value='{{i}}'>{{monthList[i]}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <div class='pad'>
+        State: 
+        <select id='dropdownState'>
+            {%for i in range(0, 50) %}
+                {% if i == selectedState %}
+                    <option value='{{i}}' selected>{{stateList[i]}}</option> 
+                {% else %}
+                    <option value='{{i}}'>{{stateList[i]}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <div class='pad'>
+        Gifford's Gun Safety Grade: 
+        <select id='dropdownGiffScore'>
+            {%for i in range(0, 12) %}
+                {% if i == scoreGiffords %}
+                    <option value='{{i}}' selected>{{gradeList[i]}}</option> 
+                {% else %}
+                    <option value='{{i}}'>{{gradeList[i]}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <input type='hidden' value='{{selectedYear}}' id='yearVal' name='yearVal'>
+    <input type='hidden' value='{{selectedMonth}}' id='monthVal' name='monthVal'>
+    <input type='hidden' value='{{selectedState}}' id='stateVal' name='stateVal'>
+    <input type='hidden' value='{{scoreGiffords}}' id='scoreGiffords' name='scoreGiffords'>
+    Mental Health Records Submitted in 2008: <span id='mentHealthRecSubmit2008Val'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='1000000' step='5' value={{mentHealthRecSubmit2008}} class='slider' id='mentHealthRecSubmit2008' name='mentHealthRecSubmit2008'>
+    </div>
+    Mental Health Records Submitted in 2017: <span id='mentHealthRecSubmit2017Val'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='1000000' step='5' value={{mentHealthRecSubmit2017}} class='slider' id='mentHealthRecSubmit2017' name='mentHealthRecSubmit2017'>
+    </div>
+    Gun Sale Denials in 2008: <span id='gunDenials2008Val'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='2500' step='1' value={{gunDenials2008}} class='slider' id='gunDenials2008' name='gunDenials2008'>
+    </div>
+    Gun Sale Denials in 2017: <span id='gunDenials2017Val'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='2500' step='1' value={{gunDenials2017}} class='slider' id='gunDenials2017' name='gunDenials2017'>
+    </div>
+    Gun Death Rate per 100k People in 2018: <span id='gunDeathRate2018Val'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='500' step='1' value={{gunDeathRate2018}} class='slider' id='gunDeathRate2018' name='gunDeathRate2018'>
+    </div>
+    <div class='pad'>
+        Gun Death Rank: 
+        <select id='dropdownGunDeathRank'>
+            {%for i in range(0, 50) %}
+                {% if i == gunDeathRank %}
+                    <option value='{{i}}' selected>{{i + 1}}</option> 
+                {% else %}
+                    <option value='{{i}}'>{{i + 1}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <input type='hidden' value='{{gunDeathRank}}' id='gunDeathRankVal' name='gunDeathRankVal'>
+    <div class='pad'>
+        Gun Ownership Rank: 
+        <select id='dropdownGunOwnerRank'>
+            {%for i in range(0, 50) %}
+                {% if i == gunOwnerRank %}
+                    <option value='{{i}}' selected>{{i + 1}}</option> 
+                {% else %}
+                    <option value='{{i}}'>{{i + 1}}</option> 
+                {% endif %}
+            {%endfor%} 
+        </select>
+    </div>
+    <input type='hidden' value='{{gunOwnerRank}}' id='gunOwnerRankVal' name='gunOwnerRankVal'>
+    # of Guns Per Capita: <span id='gunPerCapVal'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='23000' step='1' value={{gunPerCap}} class='slider' id='gunPerCap' name='gunPerCap'>
+    </div>
+    # of Guns Registered: <span id='numGunRegisVal'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='600000' step='1' value={{numGunRegis}} class='slider' id='numGunRegis' name='numGunRegis'>
+    </div>
+    5 Year Permit Cost: $<span id='permitCost5YrVal'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='300' step='1' value={{permitCost5Yr}} class='slider' id='permitCost5Yr' name='permitCost5Yr'>
+    </div>
+    Happiness Score: <span id='happinessScoreVal'></span>
+    <div class='slider-container'>
+        <input type='range' min='0' max='50' step='1' value={{happinessScore}} class='slider' id='happinessScore' name='happinessScore'>
+    </div>
+</form>
+
+<div class='pad'>
+    <button type='submit' form='form' value='Predict!'>Predict!</button>
+</div>
+
+<script type='text/javascript'>
+    // --- DROPDOWN ---
+    // Get the dropdown elements
+    var dropdownYear = document.getElementById('dropdownYear');
+    var dropdownYearVal = document.getElementById('yearVal');
+    var dropdownMonth = document.getElementById('dropdownMonth');
+    var dropdownMonthVal = document.getElementById('monthVal');
+    var dropdownState = document.getElementById('dropdownState');
+    var dropdownStateVal = document.getElementById('stateVal');
+    var dropdownGiffScore = document.getElementById('dropdownGiffScore');
+    var dropdownGiffScoreVal = document.getElementById('scoreGiffords');
+    var dropdownGunDeathRank = document.getElementById('dropdownGunDeathRank');
+    var dropdownGunDeathRankVal = document.getElementById('gunDeathRankVal');
+    var dropdownGunOwnerRank = document.getElementById('dropdownGunOwnerRank');
+    var dropdownGunOwnerRankVal = document.getElementById('gunOwnerRankVal');
+
+    // Update the hidden form selection when the dropdown changes
+    dropdownYear.onchange = function() {
+        dropdownYearVal.value = dropdownYear.selectedIndex
+    }
+    dropdownMonth.onchange = function() {
+        dropdownMonthVal.value = dropdownMonth.selectedIndex
+    }
+    dropdownState.onchange = function() {
+        dropdownStateVal.value = dropdownState.selectedIndex
+    }
+    dropdownGiffScore.onchange = function() {
+        dropdownGiffScoreVal.value = dropdownGiffScore.selectedIndex
+    }
+    dropdownGunDeathRank.onchange = function() {
+        dropdownGunDeathRankVal.value = dropdownGunDeathRank.selectedIndex
+    }
+    dropdownGunOwnerRank.onchange = function() {
+        dropdownGunOwnerRankVal.value = dropdownGunOwnerRank.selectedIndex
+    }
+
+     // --- SLIDER ---
+    // Get the slider elements
+    var sliderMentHealthRecSubmit2008 = document.getElementById('mentHealthRecSubmit2008');
+    var sliderMentHealthRecSubmit2008Val = document.getElementById('mentHealthRecSubmit2008Val');
+    var sliderMentHealthRecSubmit2017 = document.getElementById('mentHealthRecSubmit2017');
+    var sliderMentHealthRecSubmit2017Val = document.getElementById('mentHealthRecSubmit2017Val');
+    var sliderGunDenials2008 = document.getElementById('gunDenials2008');
+    var sliderGunDenials2008Val = document.getElementById('gunDenials2008Val');
+    var sliderGunDenials2017 = document.getElementById('gunDenials2017');
+    var sliderGunDenials2017Val = document.getElementById('gunDenials2017Val');
+    var sliderGunDeathRate2018 = document.getElementById('gunDeathRate2018');
+    var sliderGunDeathRate2018Val = document.getElementById('gunDeathRate2018Val');
+    var sliderGunPerCap = document.getElementById('gunPerCap');
+    var sliderGunPerCapVal = document.getElementById('gunPerCapVal');
+    var sliderNumGunRegis = document.getElementById('numGunRegis');
+    var sliderNumGunRegisVal = document.getElementById('numGunRegisVal');
+    var sliderPermitCost5Yr = document.getElementById('permitCost5Yr');
+    var sliderPermitCost5YrVal = document.getElementById('permitCost5YrVal');
+    var sliderHappinessScore = document.getElementById('happinessScore');
+    var sliderHappinessScoreVal = document.getElementById('happinessScoreVal');
+
+    // Set the values
+    sliderMentHealthRecSubmit2008Val.innerHTML = sliderMentHealthRecSubmit2008.value;
+    sliderMentHealthRecSubmit2017Val.innerHTML = sliderMentHealthRecSubmit2017.value;
+    sliderGunDenials2008Val.innerHTML = sliderGunDenials2008.value;
+    sliderGunDenials2017Val.innerHTML = sliderGunDenials2017.value;
+    sliderGunDeathRate2018Val.innerHTML = sliderGunDeathRate2018.value / 10;
+    sliderGunPerCapVal.innerHTML = sliderGunPerCap.value / 100;
+    sliderNumGunRegisVal.innerHTML = sliderNumGunRegis.value;
+    sliderPermitCost5YrVal.innerHTML = sliderPermitCost5Yr.value;
+    sliderHappinessScoreVal.innerHTML = sliderHappinessScore.value;
+
+    // Update slider value when it's dragged
+    sliderMentHealthRecSubmit2008.oninput = function() {
+        sliderMentHealthRecSubmit2008Val.innerHTML = this.value;
+    }
+    sliderMentHealthRecSubmit2017.oninput = function() {
+        sliderMentHealthRecSubmit2017Val.innerHTML = this.value;
+    }
+    sliderGunDenials2008.oninput = function() {
+        sliderGunDenials2008Val.innerHTML = this.value;
+    }
+    sliderGunDenials2017.oninput = function() {
+        sliderGunDenials2017Val.innerHTML = this.value;
+    }
+    sliderGunDeathRate2018.oninput = function() {
+        sliderGunDeathRate2018Val.innerHTML = this.value / 10;
+    }
+    sliderGunPerCap.oninput = function() {
+        sliderGunPerCapVal.innerHTML = this.value / 100;
+    }
+    sliderNumGunRegis.oninput = function() {
+        sliderNumGunRegisVal.innerHTML = this.value;
+    }
+    sliderPermitCost5Yr.oninput = function() {
+        sliderPermitCost5YrVal.innerHTML = this.value;
+    }
+    sliderHappinessScore.oninput = function() {
+        sliderHappinessScoreVal.innerHTML = this.value;
+    }
+</script>
+
+{% endblock %}
+
+{% block map %}
+{% endblock %}
