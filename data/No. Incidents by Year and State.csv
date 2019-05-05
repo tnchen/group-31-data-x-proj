@@ -1,234 +1,251 @@
 year,state,n_incidents
-2014,Alabama,33
-2014,Alaska,2
-2014,Arizona,36
-2014,Arkansas,28
-2014,California,214
-2014,Colorado,16
-2014,Connecticut,7
-2014,Delaware,6
-2014,Florida,124
-2014,Georgia,86
-2014,Hawaii,1
-2014,Idaho,3
-2014,Illinois,128
-2014,Indiana,44
-2014,Iowa,6
-2014,Kansas,12
-2014,Kentucky,17
-2014,Louisiana,59
-2014,Maine,1
-2014,Maryland,32
-2014,Massachusetts,10
-2014,Michigan,58
-2014,Minnesota,14
-2014,Mississippi,31
-2014,Missouri,72
-2014,Nebraska,6
-2014,Nevada,22
-2014,New Hampshire,1
-2014,New Jersey,38
-2014,New Mexico,10
-2014,New York,63
-2014,North Carolina,60
-2014,North Dakota,1
-2014,Ohio,57
-2014,Oklahoma,15
-2014,Oregon,14
-2014,Pennsylvania,77
-2014,Rhode Island,4
-2014,South Carolina,54
-2014,South Dakota,2
-2014,Tennessee,56
-2014,Texas,130
-2014,Utah,7
-2014,Vermont,1
-2014,Virginia,33
-2014,Washington,19
-2014,West Virginia,7
-2014,Wisconsin,18
-2015,Alabama,45
-2015,Alaska,5
-2015,Arizona,25
-2015,Arkansas,21
-2015,California,175
-2015,Colorado,24
-2015,Connecticut,14
-2015,Delaware,10
-2015,Florida,120
-2015,Georgia,93
-2015,Idaho,2
-2015,Illinois,125
-2015,Indiana,39
-2015,Iowa,4
-2015,Kansas,11
-2015,Kentucky,25
-2015,Louisiana,70
-2015,Maine,5
-2015,Maryland,57
-2015,Massachusetts,24
-2015,Michigan,54
-2015,Minnesota,13
-2015,Mississippi,29
-2015,Missouri,65
-2015,Montana,5
-2015,Nebraska,8
-2015,Nevada,21
-2015,New Hampshire,1
-2015,New Jersey,39
-2015,New Mexico,20
-2015,New York,76
-2015,North Carolina,78
-2015,North Dakota,3
-2015,Ohio,70
-2015,Oklahoma,21
-2015,Oregon,19
-2015,Pennsylvania,71
-2015,Rhode Island,1
-2015,South Carolina,43
-2015,South Dakota,1
-2015,Tennessee,59
-2015,Texas,136
-2015,Utah,2
-2015,Virginia,47
-2015,Washington,21
-2015,West Virginia,8
-2015,Wisconsin,31
-2015,Wyoming,2
-2016,Alabama,55
-2016,Alaska,6
-2016,Arizona,28
-2016,Arkansas,17
-2016,California,186
-2016,Colorado,26
-2016,Connecticut,7
-2016,Delaware,3
-2016,Florida,150
-2016,Georgia,64
-2016,Hawaii,2
-2016,Idaho,3
-2016,Illinois,153
-2016,Indiana,39
-2016,Iowa,6
-2016,Kansas,9
-2016,Kentucky,27
-2016,Louisiana,57
-2016,Maine,4
-2016,Maryland,51
-2016,Massachusetts,10
-2016,Michigan,58
-2016,Minnesota,16
-2016,Mississippi,36
-2016,Missouri,73
-2016,Nebraska,4
-2016,Nevada,18
-2016,New Hampshire,2
-2016,New Jersey,44
-2016,New Mexico,13
-2016,New York,65
-2016,North Carolina,66
-2016,Ohio,67
-2016,Oklahoma,23
-2016,Oregon,12
-2016,Pennsylvania,66
-2016,Rhode Island,1
-2016,South Carolina,42
-2016,South Dakota,3
-2016,Tennessee,50
-2016,Texas,132
-2016,Utah,7
-2016,Virginia,49
-2016,Washington,17
-2016,West Virginia,8
-2016,Wisconsin,24
-2016,Wyoming,2
-2017,Alabama,72
-2017,Alaska,4
-2017,Arizona,47
-2017,Arkansas,27
-2017,California,195
-2017,Colorado,24
-2017,Connecticut,11
-2017,Delaware,8
-2017,Florida,141
-2017,Georgia,91
-2017,Hawaii,1
-2017,Idaho,1
-2017,Illinois,156
-2017,Indiana,57
-2017,Iowa,14
-2017,Kansas,19
-2017,Kentucky,35
-2017,Louisiana,72
-2017,Maine,4
-2017,Maryland,64
-2017,Massachusetts,20
-2017,Michigan,58
-2017,Minnesota,10
-2017,Mississippi,51
-2017,Missouri,96
-2017,Montana,2
-2017,Nebraska,6
-2017,Nevada,32
-2017,New Hampshire,2
-2017,New Jersey,43
-2017,New Mexico,11
-2017,New York,49
-2017,North Carolina,74
-2017,North Dakota,1
-2017,Ohio,102
-2017,Oklahoma,29
-2017,Oregon,4
-2017,Pennsylvania,84
-2017,Rhode Island,4
-2017,South Carolina,43
-2017,South Dakota,1
-2017,Tennessee,85
-2017,Texas,159
-2017,Utah,10
-2017,Vermont,1
-2017,Virginia,67
-2017,Washington,22
-2017,West Virginia,5
-2017,Wisconsin,27
-2017,Wyoming,1
-2018,Alabama,16
-2018,Arizona,8
-2018,Arkansas,7
-2018,California,44
-2018,Colorado,8
-2018,Connecticut,1
-2018,Florida,34
-2018,Georgia,22
-2018,Idaho,2
-2018,Illinois,27
-2018,Indiana,10
-2018,Iowa,1
-2018,Kansas,3
-2018,Kentucky,7
-2018,Louisiana,18
-2018,Maryland,12
-2018,Massachusetts,5
-2018,Michigan,11
-2018,Minnesota,4
-2018,Mississippi,13
-2018,Missouri,18
-2018,Montana,2
-2018,Nebraska,3
-2018,Nevada,8
-2018,New Jersey,6
-2018,New Mexico,4
-2018,New York,5
-2018,North Carolina,14
-2018,Ohio,7
-2018,Oklahoma,5
-2018,Oregon,2
-2018,Pennsylvania,20
-2018,South Carolina,19
-2018,Tennessee,10
-2018,Texas,44
-2018,Utah,1
-2018,Virginia,12
-2018,Washington,6
-2018,West Virginia,4
-2018,Wisconsin,6
+2014,Alabama,756
+2014,Alaska,64
+2014,Arizona,351
+2014,Arkansas,303
+2014,California,2168
+2014,Colorado,240
+2014,Connecticut,241
+2014,Delaware,203
+2014,Florida,1778
+2014,Georgia,1021
+2014,Hawaii,19
+2014,Idaho,46
+2014,Illinois,2250
+2014,Indiana,712
+2014,Iowa,193
+2014,Kansas,210
+2014,Kentucky,426
+2014,Louisiana,1091
+2014,Maine,38
+2014,Maryland,772
+2014,Massachusetts,343
+2014,Michigan,747
+2014,Minnesota,206
+2014,Mississippi,435
+2014,Missouri,782
+2014,Montana,58
+2014,Nebraska,168
+2014,Nevada,238
+2014,New Hampshire,53
+2014,New Jersey,713
+2014,New Mexico,146
+2014,New York,1066
+2014,North Carolina,1105
+2014,North Dakota,35
+2014,Ohio,1352
+2014,Oklahoma,328
+2014,Oregon,171
+2014,Pennsylvania,1515
+2014,Rhode Island,74
+2014,South Carolina,758
+2014,South Dakota,28
+2014,Tennessee,950
+2014,Texas,1695
+2014,Utah,101
+2014,Vermont,36
+2014,Virginia,689
+2014,Washington,325
+2014,West Virginia,158
+2014,Wisconsin,522
+2014,Wyoming,24
+2015,Alabama,778
+2015,Alaska,124
+2015,Arizona,320
+2015,Arkansas,324
+2015,California,2141
+2015,Colorado,378
+2015,Connecticut,343
+2015,Delaware,220
+2015,Florida,1812
+2015,Georgia,1344
+2015,Hawaii,29
+2015,Idaho,62
+2015,Illinois,2814
+2015,Indiana,839
+2015,Iowa,214
+2015,Kansas,267
+2015,Kentucky,540
+2015,Louisiana,1076
+2015,Maine,43
+2015,Maryland,976
+2015,Massachusetts,386
+2015,Michigan,762
+2015,Minnesota,203
+2015,Mississippi,460
+2015,Missouri,1106
+2015,Montana,49
+2015,Nebraska,183
+2015,Nevada,328
+2015,New Hampshire,44
+2015,New Jersey,595
+2015,New Mexico,213
+2015,New York,1595
+2015,North Carolina,1247
+2015,North Dakota,41
+2015,Ohio,1487
+2015,Oklahoma,510
+2015,Oregon,239
+2015,Pennsylvania,1206
+2015,Rhode Island,81
+2015,South Carolina,927
+2015,South Dakota,44
+2015,Tennessee,1133
+2015,Texas,1927
+2015,Utah,134
+2015,Vermont,29
+2015,Virginia,898
+2015,Washington,395
+2015,West Virginia,180
+2015,Wisconsin,649
+2015,Wyoming,30
+2016,Alabama,937
+2016,Alaska,142
+2016,Arizona,416
+2016,Arkansas,396
+2016,California,2328
+2016,Colorado,346
+2016,Connecticut,314
+2016,Delaware,194
+2016,Florida,1912
+2016,Georgia,1004
+2016,Hawaii,38
+2016,Idaho,54
+2016,Illinois,3838
+2016,Indiana,863
+2016,Iowa,212
+2016,Kansas,264
+2016,Kentucky,568
+2016,Louisiana,1172
+2016,Maine,47
+2016,Maryland,895
+2016,Massachusetts,434
+2016,Michigan,727
+2016,Minnesota,202
+2016,Mississippi,603
+2016,Missouri,976
+2016,Montana,44
+2016,Nebraska,171
+2016,Nevada,360
+2016,New Hampshire,46
+2016,New Jersey,687
+2016,New Mexico,181
+2016,New York,1294
+2016,North Carolina,1307
+2016,North Dakota,38
+2016,Ohio,1514
+2016,Oklahoma,497
+2016,Oregon,185
+2016,Pennsylvania,1278
+2016,Rhode Island,71
+2016,South Carolina,857
+2016,South Dakota,41
+2016,Tennessee,1191
+2016,Texas,1992
+2016,Utah,109
+2016,Vermont,16
+2016,Virginia,977
+2016,Washington,329
+2016,West Virginia,185
+2016,Wisconsin,517
+2016,Wyoming,20
+2017,Alabama,1133
+2017,Alaska,120
+2017,Arizona,445
+2017,Arkansas,510
+2017,California,2546
+2017,Colorado,401
+2017,Connecticut,326
+2017,Delaware,243
+2017,Florida,2107
+2017,Georgia,1334
+2017,Hawaii,21
+2017,Idaho,60
+2017,Illinois,3549
+2017,Indiana,889
+2017,Iowa,244
+2017,Kansas,317
+2017,Kentucky,640
+2017,Louisiana,1369
+2017,Maine,56
+2017,Maryland,1085
+2017,Massachusetts,482
+2017,Michigan,905
+2017,Minnesota,303
+2017,Mississippi,710
+2017,Missouri,1188
+2017,Montana,61
+2017,Nebraska,167
+2017,Nevada,325
+2017,New Hampshire,45
+2017,New Jersey,720
+2017,New Mexico,213
+2017,New York,1153
+2017,North Carolina,1370
+2017,North Dakota,43
+2017,Ohio,1714
+2017,Oklahoma,501
+2017,Oregon,225
+2017,Pennsylvania,1418
+2017,Rhode Island,70
+2017,South Carolina,949
+2017,South Dakota,33
+2017,Tennessee,1341
+2017,Texas,2022
+2017,Utah,136
+2017,Vermont,16
+2017,Virginia,1042
+2017,Washington,463
+2017,West Virginia,197
+2017,Wisconsin,601
+2017,Wyoming,19
+2018,Alabama,260
+2018,Alaska,18
+2018,Arizona,112
+2018,Arkansas,104
+2018,California,529
+2018,Colorado,103
+2018,Connecticut,61
+2018,Delaware,31
+2018,Florida,437
+2018,Georgia,245
+2018,Hawaii,5
+2018,Idaho,18
+2018,Illinois,509
+2018,Indiana,163
+2018,Iowa,42
+2018,Kansas,76
+2018,Kentucky,133
+2018,Louisiana,273
+2018,Maine,8
+2018,Maryland,168
+2018,Massachusetts,81
+2018,Michigan,195
+2018,Minnesota,62
+2018,Mississippi,175
+2018,Missouri,216
+2018,Montana,13
+2018,Nebraska,33
+2018,Nevada,85
+2018,New Hampshire,11
+2018,New Jersey,88
+2018,New Mexico,53
+2018,New York,154
+2018,North Carolina,264
+2018,North Dakota,7
+2018,Ohio,301
+2018,Oklahoma,104
+2018,Oregon,59
+2018,Pennsylvania,258
+2018,Rhode Island,17
+2018,South Carolina,197
+2018,South Dakota,12
+2018,Tennessee,244
+2018,Texas,501
+2018,Utah,29
+2018,Vermont,6
+2018,Virginia,210
+2018,Washington,108
+2018,West Virginia,45
+2018,Wisconsin,128
+2018,Wyoming,10
