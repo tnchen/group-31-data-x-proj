@@ -1,5 +1,6 @@
 from flask import *
 import folium
+from folium.plugins import MarkerCluster
 import math
 import os
 from pathlib import Path
@@ -63,6 +64,15 @@ def map():
         # Get the selected factor
         selectedFactor = factors[selectedIndex]
 
+        # Add the individual data
+        cluster = MarkerCluster(name='Gun Violence Incidents')
+        for i, row in data.gunViolence.sample(frac=1).head(numIncidents).iterrows():
+            popup = folium.Popup('Date: ' + str(row.month) + '/' + str(row.day) + '/' + str(row.year) +
+                                 '<br>Lives Lost: ' + str(row.n_killed), max_width=200)
+            marker = folium.CircleMarker(location=[row['latitude'], row['longitude']], radius=5 * (row['n_killed'] + row['n_injured']), fill=True, color=data.getMarkerColor(row.n_killed), popup=popup)
+            cluster.add_child(marker)
+        cluster.add_to(mapObj)
+
         # Add the state data
         path = os.path.join(directory, 'us_states_20m.json')
         folium.Choropleth(
@@ -77,11 +87,6 @@ def map():
             legend_name=selectedFactor
         ).add_to(mapObj)
         folium.LayerControl().add_to(mapObj)
-
-        # Add the individual data
-        for i, row in data.gunViolence.sample(frac=1).head(numIncidents).iterrows():
-            marker = folium.CircleMarker(location=[row['latitude'], row['longitude']], radius=(row['n_killed'] + row['n_injured']))
-            marker.add_to(mapObj)
     else:
         selectedIndex = 0
 

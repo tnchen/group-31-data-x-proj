@@ -25,3 +25,14 @@ def getColor(col):
         return 'OrRd'
     else:
         return 'YlGn'
+
+
+def getMarkerColor(n_killed):
+    if (n_killed == 0):
+        return '#ffff00'
+    elif (n_killed < 2):
+        return '#f8d568'
+    elif (n_killed < 5):
+        return '#ffa500'
+    else:
+        return '#ff0000'
