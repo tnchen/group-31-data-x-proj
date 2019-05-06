@@ -6,8 +6,9 @@ import os
 from pathlib import Path
 import re
 
-# Load our data
+# Load our data and ML
 import data
+import ml
 directory = os.path.dirname(os.path.dirname(__file__))
 
 app = Flask(__name__)
@@ -195,9 +196,9 @@ def get():
 
         # Extract the guns per capita
         if gunPerCap != '':
-            gunPerCap = float(gunPerCap) / 100
+            gunPerCap = float(gunPerCap) / 1000
         else:
-            gunPerCap = 33.15
+            gunPerCap = 0.033
 
         # Extract the number of guns registered
         if numGunRegis != '':
@@ -232,7 +233,7 @@ def get():
         gunDeathRate2018 = 22.9  # per 100k people
         gunDeathRank = 1  # zero indexed
         gunOwnerRank = 5  # zero indexed
-        gunPerCap = 33.15
+        gunPerCap = 0.033
         numGunRegis = 161641
         permitCost5Yr = 25
         happinessScore = 4
@@ -241,7 +242,7 @@ def get():
 
     return render_template('ml.html', monthList=month_list, stateList = state_list, gradeList=grade_list, selectedYear=year, selectedMonth=month, selectedState=state, mentHealthRecSubmit2008=mentHealthRecSubmit2008,
                            mentHealthRecSubmit2017=mentHealthRecSubmit2017, gunDenials2008=gunDenials2008, gunDenials2017=gunDenials2017, gunDeathRate2018=gunDeathRate2018 * 10,
-                           gunDeathRank=gunDeathRank, gunOwnerRank=gunOwnerRank, gunPerCap=gunPerCap * 100, numGunRegis=numGunRegis, permitCost5Yr=permitCost5Yr,
+                           gunDeathRank=gunDeathRank, gunOwnerRank=gunOwnerRank, gunPerCap=gunPerCap * 1000, numGunRegis=numGunRegis, permitCost5Yr=permitCost5Yr,
                            happinessScore=happinessScore, scoreGiffords=scoreGiffords)
 
 if __name__ == '__main__':

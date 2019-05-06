@@ -103,7 +103,7 @@
     <input type='hidden' value='{{gunOwnerRank}}' id='gunOwnerRankVal' name='gunOwnerRankVal'>
     # of Guns Per Capita: <span id='gunPerCapVal'></span>
     <div class='slider-container'>
-        <input type='range' min='0' max='23000' step='1' value={{gunPerCap}} class='slider' id='gunPerCap' name='gunPerCap'>
+        <input type='range' min='0' max='1000' step='1' value={{gunPerCap}} class='slider' id='gunPerCap' name='gunPerCap'>
     </div>
     # of Guns Registered: <span id='numGunRegisVal'></span>
     <div class='slider-container'>
@@ -186,7 +186,7 @@
     sliderGunDenials2008Val.innerHTML = sliderGunDenials2008.value;
     sliderGunDenials2017Val.innerHTML = sliderGunDenials2017.value;
     sliderGunDeathRate2018Val.innerHTML = sliderGunDeathRate2018.value / 10;
-    sliderGunPerCapVal.innerHTML = sliderGunPerCap.value / 100;
+    sliderGunPerCapVal.innerHTML = sliderGunPerCap.value / 1000;
     sliderNumGunRegisVal.innerHTML = sliderNumGunRegis.value;
     sliderPermitCost5YrVal.innerHTML = sliderPermitCost5Yr.value;
     sliderHappinessScoreVal.innerHTML = sliderHappinessScore.value;
@@ -208,7 +208,7 @@
         sliderGunDeathRate2018Val.innerHTML = this.value / 10;
     }
     sliderGunPerCap.oninput = function() {
-        sliderGunPerCapVal.innerHTML = this.value / 100;
+        sliderGunPerCapVal.innerHTML = this.value / 1000;
     }
     sliderNumGunRegis.oninput = function() {
         sliderNumGunRegisVal.innerHTML = this.value;
