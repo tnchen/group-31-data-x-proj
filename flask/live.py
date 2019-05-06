@@ -2,6 +2,7 @@ from flask import *
 import folium
 from folium.plugins import MarkerCluster
 import math
+import numpy as np
 import os
 from pathlib import Path
 import re
@@ -16,7 +17,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 @app.route('/map', methods=['GET', 'POST'])
-def map():
+def mapPage():
     if request.method == 'POST':
         # Get form info
         numIncidents = request.form['numIncidents']
@@ -100,7 +101,7 @@ def map():
 
 
 @app.route('/ml', methods=['GET', 'POST'])
-def get():
+def mlPage():
     # Define list of values
     year_list = list(range(2005, 2026))
     month_list = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -162,7 +163,7 @@ def get():
         if mentHealthRecSubmit2017 != '':
             mentHealthRecSubmit2017 = int(mentHealthRecSubmit2017)
         else:
-            mentHealthRecSubmit2017 = 155
+            mentHealthRecSubmit2017 = 5036
 
         # Extract the number of gun sale denials in 2008
         if gunDenials2008 != '':
@@ -192,7 +193,7 @@ def get():
         if gunOwnerRank != '':
             gunOwnerRank = int(gunOwnerRank)
         else:
-            gunOwnerRank = 5
+            gunOwnerRank = 6
 
         # Extract the guns per capita
         if gunPerCap != '':
@@ -232,7 +233,7 @@ def get():
         gunDenials2017 = 125
         gunDeathRate2018 = 22.9  # per 100k people
         gunDeathRank = 1  # zero indexed
-        gunOwnerRank = 5  # zero indexed
+        gunOwnerRank = 6  # zero indexed
         gunPerCap = 0.033
         numGunRegis = 161641
         permitCost5Yr = 25
@@ -240,10 +241,19 @@ def get():
         state = 0  # based on state_list
         scoreGiffords = 11  # based on grade_list
 
-    return render_template('ml.html', monthList=month_list, stateList = state_list, gradeList=grade_list, selectedYear=year, selectedMonth=month, selectedState=state, mentHealthRecSubmit2008=mentHealthRecSubmit2008,
+    # Create the ML input array
+    stateArr = [0] * len(state_list)
+    stateArr[state] = 1
+    gradeArr = [0] * len(grade_list)
+    gradeArr[scoreGiffords] = 1
+    X = [year, month + 1, mentHealthRecSubmit2008, mentHealthRecSubmit2017, gunDenials2008, gunDenials2017, gunDeathRate2018, gunDeathRank + 1, gunOwnerRank + 1,
+         gunPerCap, numGunRegis, permitCost5Yr, happinessScore] + stateArr + gradeArr
+    prediction = ml.predict([X])
+
+    return render_template('ml.html', monthList=month_list, stateList=state_list, gradeList=grade_list, selectedYear=year, selectedMonth=month, selectedState=state, mentHealthRecSubmit2008=mentHealthRecSubmit2008,
                            mentHealthRecSubmit2017=mentHealthRecSubmit2017, gunDenials2008=gunDenials2008, gunDenials2017=gunDenials2017, gunDeathRate2018=gunDeathRate2018 * 10,
                            gunDeathRank=gunDeathRank, gunOwnerRank=gunOwnerRank, gunPerCap=gunPerCap * 1000, numGunRegis=numGunRegis, permitCost5Yr=permitCost5Yr,
-                           happinessScore=happinessScore, scoreGiffords=scoreGiffords)
+                           happinessScore=happinessScore, scoreGiffords=scoreGiffords, prediction=prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -10,8 +10,8 @@ gunViolence.fillna(0, inplace=True)
 
 # Subset state data
 stateCols = ['state', 'Mental_Health_Records_Submitted_2008', 'Mental_Health_Records_Submitted_2017', 'Gun_Sale_Denials_2008',
-             'Gun_Sale_Denials_2017', 'Giffords Gun Safety Score',  'Gun Deaths per 100k People (2018)',
-             'Gun Death Rate (Ranked High to Low)', '# of guns per capita', '# of guns registered', 'Permit Type',
+             'Gun_Sale_Denials_2017',  'Gun Deaths per 100k People (2018)',
+             'Gun Death Rate (Ranked High to Low)', '# of guns per capita', '# of guns registered',
              'Handgun_Carry_Permit_Fee', 'Years_Valid', '5_Year_Cost', 'Happiness Score']
 
 stateData = gunViolence[stateCols].drop_duplicates('state')

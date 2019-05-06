@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-
+<p><b>Predicted # of Incidents: {{prediction}}</b></p>
 <form action='/ml' method='post' id='form'> 
     <div class='pad'>
         Year: 
@@ -57,11 +57,11 @@
     <input type='hidden' value='{{scoreGiffords}}' id='scoreGiffords' name='scoreGiffords'>
     Mental Health Records Submitted in 2008: <span id='mentHealthRecSubmit2008Val'></span>
     <div class='slider-container'>
-        <input type='range' min='0' max='1000000' step='5' value={{mentHealthRecSubmit2008}} class='slider' id='mentHealthRecSubmit2008' name='mentHealthRecSubmit2008'>
+        <input type='range' min='0' max='1000000' step='1' value={{mentHealthRecSubmit2008}} class='slider' id='mentHealthRecSubmit2008' name='mentHealthRecSubmit2008'>
     </div>
     Mental Health Records Submitted in 2017: <span id='mentHealthRecSubmit2017Val'></span>
     <div class='slider-container'>
-        <input type='range' min='0' max='1000000' step='5' value={{mentHealthRecSubmit2017}} class='slider' id='mentHealthRecSubmit2017' name='mentHealthRecSubmit2017'>
+        <input type='range' min='0' max='1000000' step='1' value={{mentHealthRecSubmit2017}} class='slider' id='mentHealthRecSubmit2017' name='mentHealthRecSubmit2017'>
     </div>
     Gun Sale Denials in 2008: <span id='gunDenials2008Val'></span>
     <div class='slider-container'>
