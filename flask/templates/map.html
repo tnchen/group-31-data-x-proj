@@ -15,6 +15,12 @@
         </select>
     </div>
     <div class='slider-container'>
+        <input type='range' min='2014' max='2018' step='1' value={{yearVal}} class='slider' id='yearVal' name='yearVal'>
+    </div>
+    <div class='pad'>
+        Year: <span id='sliderYearVal'></span>
+    </div>
+    <div class='slider-container'>
         <input type='range' min='0' max='5000' step='100' value={{numIncidents}} class='slider' id='numIncidents' name='numIncidents'>
     </div>
     <input type='hidden' value='' id='center' name='center'>
@@ -50,13 +56,19 @@
     // Get the slider elements
     var slider = document.getElementById('numIncidents');
     var sliderVal = document.getElementById('sliderVal');
+    var sliderYear = document.getElementById('yearVal');
+    var sliderYearVal = document.getElementById('sliderYearVal');
 
     // Set the values
     sliderVal.innerHTML = slider.value;
+    sliderYearVal.innerHTML = sliderYear.value;
 
     // Update slider value when it's dragged
     slider.oninput = function() {
         sliderVal.innerHTML = this.value;
+    }
+    sliderYear.oninput = function() {
+        sliderYearVal.innerHTML = this.value;
     }
 
     // --- MAP ---

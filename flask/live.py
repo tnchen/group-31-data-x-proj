@@ -24,6 +24,7 @@ def mapPage():
         center = request.form['center']
         zoom = request.form['zoom']
         selectedIndex = request.form['indexVal']
+        yearVal = request.form['yearVal']
 
         # Extract the number of incidents
         if numIncidents != '':
@@ -50,14 +51,21 @@ def mapPage():
             selectedIndex = int(selectedIndex)
         else:
             selectedIndex = -1
+
+        # Extract the year
+        if yearVal != '':
+            yearVal = int(yearVal)
+        else:
+            yearVal = 2014
     else:
         numIncidents = 100
         zoom = 4
         center = [35, -97]
         selectedIndex = -1
+        yearVal = 2014
 
     # Define our factors
-    factors = data.stateCols[1:]
+    factors = data.dropdownOptions
 
     # Create the map
     mapObj = folium.Map(location=center, zoom_start=zoom, tiles='Mapbox Bright', width='75%', height='75%')
@@ -68,26 +76,39 @@ def mapPage():
 
         # Add the individual data
         cluster = MarkerCluster(name='Gun Violence Incidents')
-        for i, row in data.gunViolence.sample(frac=1).head(numIncidents).iterrows():
-            popup = folium.Popup('Date: ' + str(row.month) + '/' + str(row.day) + '/' + str(row.year) +
-                                 '<br>Lives Lost: ' + str(row.n_killed), max_width=200)
-            marker = folium.CircleMarker(location=[row['latitude'], row['longitude']], radius=5 * (row['n_killed'] + row['n_injured']), fill=True, color=data.getMarkerColor(row.n_killed), popup=popup)
-            cluster.add_child(marker)
-        cluster.add_to(mapObj)
+        for i, row in data.gunViolence[data.gunViolence['year'] == yearVal].sample(frac=1).head(numIncidents).iterrows():
+            cluster.add_child(folium.CircleMarker(location=[row.latitude, row.longitude], radius=5 * (row.n_killed + row.n_injured), fill=True, color=data.getMarkerColor(row.n_killed),
+                                                  popup=folium.Popup('Date: ' + str(row.month) + '-' + str(row.day) + '-' + str(row.year) + '</br>Lives Lost: ' + str(row.n_killed), max_width=200)))
+        mapObj.add_child(cluster)
 
-        # Add the state data
-        path = os.path.join(directory, 'data/us_states_20m.json')
-        folium.Choropleth(
-            geo_data=path,
-            name=selectedFactor,
-            data=data.stateData,
-            columns=['state', selectedFactor],
-            key_on='feature.properties.NAME',
-            fill_color=data.getColor(selectedFactor),
-            fill_opacity=0.5,
-            line_opacity=0.2,
-            legend_name=selectedFactor
-        ).add_to(mapObj)
+        if selectedFactor == '2015 Unemployment Rate':
+            # Add the county data
+            path = os.path.join(directory, 'data/us_counties_20m.json')
+            folium.Choropleth(
+                geo_data=path,
+                name=selectedFactor,
+                data=data.countyData,
+                columns=['County', selectedFactor],
+                key_on='feature.properties.NAME',
+                fill_color=data.getColor(selectedFactor),
+                fill_opacity=0.5,
+                line_opacity=0.2,
+                legend_name=selectedFactor
+            ).add_to(mapObj)
+        else:
+            # Add the state data
+            path = os.path.join(directory, 'data/us_states_20m.json')
+            folium.Choropleth(
+                geo_data=path,
+                name=selectedFactor,
+                data=data.stateData,
+                columns=['State', selectedFactor],
+                key_on='feature.properties.NAME',
+                fill_color=data.getColor(selectedFactor),
+                fill_opacity=0.5,
+                line_opacity=0.2,
+                legend_name=selectedFactor
+            ).add_to(mapObj)
         folium.LayerControl().add_to(mapObj)
     else:
         selectedIndex = 0
@@ -97,7 +118,7 @@ def mapPage():
     mapVar = re.findall('(map_[a-z0-9]+)', mapHTML)[0]
     mapHTML = Markup(mapHTML)
 
-    return render_template('map.html', map=mapHTML, mapVar=mapVar, numIncidents=numIncidents, factors=factors, numFactors=len(data.stateCols[1:]), selectedIndex=selectedIndex)
+    return render_template('map.html', map=mapHTML, mapVar=mapVar, numIncidents=numIncidents, factors=factors, numFactors=len(factors), selectedIndex=selectedIndex, yearVal=yearVal)
 
 
 @app.route('/ml', methods=['GET', 'POST'])
@@ -256,4 +277,4 @@ def mlPage():
                            happinessScore=happinessScore, scoreGiffords=scoreGiffords, prediction=prediction)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
