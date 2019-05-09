@@ -31,7 +31,8 @@ predictionsSub['State'] = predictionsSub.apply(decode, axis=1)
 predictionsSub = predictionsSub[['State', 'predictions']]
 
 # Get the country geometry
-stateGeom = pd.read_json('data/us_states_20m.json')
+path = os.path.join(directory, 'data/us_states_20m.json')
+stateGeom = pd.read_json(path)
 for i in range(len(stateGeom['features'])):
     stateGeom['type'][i] = stateGeom['features'][i]['properties']['NAME']
     stateGeom['features'][i] = stateGeom['features'][i]['geometry']
@@ -39,7 +40,7 @@ stateGeom.rename(columns={'type': 'State', 'features': 'Geometry'}, inplace=True
 
 # Reformat datasets
 stateCols = ['state', 'Mental_Health_Records_Submitted_2008', 'Mental_Health_Records_Submitted_2017', 'Gun_Sale_Denials_2008',
-             'Gun_Sale_Denials_2017', 'Giffords Gun Safety Score',  'Gun Deaths per 100k People (2018)',
+             'Gun_Sale_Denials_2017',  'Gun Deaths per 100k People (2018)',
              'Gun Death Rate (Ranked High to Low)', '# of guns per capita', '# of guns registered',
              'Handgun_Carry_Permit_Fee', 'Years_Valid', '5_Year_Cost', 'Happiness Score']
 countyCols = ['County', 'Rate']
@@ -67,7 +68,6 @@ stateData.rename(columns={'predictions': '# Predicted Incidents (2019)',
                           },
                  inplace=True)
 dropdownOptions = np.concatenate([stateData.columns.values[2:], countyData.columns.values[1:]])
-print(dropdownOptions)
 
 # Define list of factors that should be plotted with high values as red instead of green
 badFactorsList = ['Gun Deaths per 100k People (2018)', '# of guns per capita', '# of guns registered', '2015 Unemployment Rate']

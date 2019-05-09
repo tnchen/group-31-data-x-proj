@@ -83,7 +83,7 @@ def mapPage():
 
         if selectedFactor == '2015 Unemployment Rate':
             # Add the county data
-            path = os.path.join(directory, 'data/us_counties_20m.json')
+            path = os.path.join(directory, 'data', 'us_counties_20m.json')
             folium.Choropleth(
                 geo_data=path,
                 name=selectedFactor,
@@ -97,7 +97,7 @@ def mapPage():
             ).add_to(mapObj)
         else:
             # Add the state data
-            path = os.path.join(directory, 'data/us_states_20m.json')
+            path = os.path.join(directory, 'data', 'us_states_20m.json')
             folium.Choropleth(
                 geo_data=path,
                 name=selectedFactor,
